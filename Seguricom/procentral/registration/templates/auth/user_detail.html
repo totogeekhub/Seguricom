@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{user.first_name}}{% endblock %}
+{% block content %}
+{% include 'pages/includes/pages_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">{{user.first_name}}</h2>
+        <div>
+          {{user.id}}
+          <br>
+          {{user.first_name}}
+          {{user.last_name}}
+          <br>
+          <br>
+          <b>Tipo: </b>
+          {% if user.level == 1 %}
+          <p>Profesional</p>
+          {% endif %}
+          {% if user.level == 2 %}
+          <p>Manager</p>
+          {% endif %}
+          {% if user.level == 3 %}
+          <p>Manager</p>
+          {% endif %}
+          {% if user.level == 4 %}
+          <p>Default</p>
+          {% endif %}
+          {% if user.level == 0 %}
+          <p>Prevencionistas</p>
+          {% endif %}
+
+          
+
+          {% if request.user.is_staff and request.user.level == 2 %}
+            <p><a href="{% url 'prevencionistas:update' user.id %}">Editar</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

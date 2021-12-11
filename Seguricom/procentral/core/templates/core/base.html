@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <!-- Estilos -->
+    <link href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'core/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'core/css/main.css' %}" rel="stylesheet">
+
+   
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <!-- Fengyuan Chen's Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+
+
+
+
+  </head>
+  <body>
+    <body >
+      <!-- Navegación style="background-image:url('{% static 'core/img/segurilogo.jpg' %}')" -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+          <a class="navbar-brand" href="">SeguriCom  </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ned">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:pages' %}">Servicios</a>
+              </li>
+              {% if  request.user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'solicits:solicits' %}">Solicitudes</a>
+                </li>
+                {% if request.user.level == 0 %}
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'actividads:actividads' %}">Actividades</a>
+                  </li>
+                {% endif %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
+                  </li>
+
+                {% if request.user.level == 2 %}
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Usuarios <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item m-3" ><a  href="{% url 'prevencionistas:prevencionistas' %}">Prevencionistas</a></li>
+                      <li class="nav-item m-3" ><a  href="{% url 'profesionales:profesionales' %}">Profesionales</a></li>
+                      <li class="nav-item m-3" ><a  href="{% url 'udefaults:udefaults' %}">Default</a></li>
+
+                    </ul>
+                  </div>                    
+
+
+
+                {% endif %}
+
+  
+              {% endif %}
+
+
+
+            </ul>
+            <ul class="navbar-nav">
+              {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Acceder</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'signup' %}">Registrar</a>
+                </li>
+
+
+                
+              {% else %}
+               <li class="nav-item">
+                 <p>
+                 
+                 </p>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'profile' %}"> {{request.user.username}} -  Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'messenger:list' %}">Mensajes</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Contenido -->
+      {% block content %}{% endblock %}
+      <!-- Javascript -->
+      <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
+      <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'core/js/main.js' %}"></script>
+  </body>
+</html>

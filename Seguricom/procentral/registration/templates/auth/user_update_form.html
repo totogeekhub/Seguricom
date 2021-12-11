@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Actualizar Prevencionista{% endblock %}
+{% block content %}
+{% include 'auth/includes/preven_menu.html'%}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3 mb-5">
+      <div class="col-md-9 mx-auto">
+        {% if 'ok' in request.GET %}
+          <p style="color:green;"> 
+            Prevencionista editado Correctamente.
+            <a href="{% url 'prevencionistas:prevencionista' user.id user.first_name|slugify %}" >Haz click aqui para ver el resultado. </a>
+          </p>
+        {% endif %}
+            <form action="" method="post">{% csrf_token %}
+                {{ form.as_p }}
+              <div class="text-center">
+                <input type="submit" class="btn btn-primary btn-block" value="Actualizar prevencionista" />
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

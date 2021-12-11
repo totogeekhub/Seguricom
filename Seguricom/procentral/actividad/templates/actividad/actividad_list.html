@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Solicitudes{% endblock %}
+{% block content %}
+{% include 'actividad/includes/actividades_menu.html' %}
+<main role="main">
+  <div class="container mb-4">
+ {% for ac in actividades reversed %}
+
+            <div class="row mt-3">
+              <div class="col-md-9 mx-auto border">
+                <h2 class="mb-4">
+                ID:
+                {{ac.0}}
+                
+                </h2>
+                <div>
+                    <p>
+                        {% for soli in solicitudes %}
+                            {{soli.0}}
+                        {% endfor %}
+
+                        Estado Actividad : 
+                        {% if ac.4 == 0 %}
+                        Pendiente
+                        {% endif %}
+
+                        {% if ac.4 == 1 %}
+                        Realizada
+                        {% endif %}
+
+                       
+
+                    </p>
+                    <p>Fecha Programada:<br> {{ac.3}}</p>
+                </div>
+              </div>
+            </div>
+
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

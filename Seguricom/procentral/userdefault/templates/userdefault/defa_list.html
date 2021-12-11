@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Usuario Default{% endblock %}
+{% block content %}
+{% include 'userdefault/includes/defa_menu.html' %}
+<main role="main">
+              {% if request.user.is_authenticated  %}
+
+  <div class="container mb-4">
+    {% for user in object_list|dictsort:'id' reversed %}
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto">
+          <h2 class="mb-4">{{user.username}}</h2>
+          <div>
+            <p>{{user.first_name|striptags|safe|truncatechars:"200"}}</p>
+            <p>{{user.last_name|striptags|safe|truncatechars:"200"}}</p>
+
+            <p>
+              
+                    <a href="{% url 'udefaults:udefault' user.id user.username|slugify %}">Leer más</a>
+
+              {% if request.user.is_staff  %}
+                {% if  request.user.level == 2 %}
+                  | <a href="{% url 'udefaults:update' user.id %}">Editar</a>
+                  | <a href="{% url 'udefaults:delete' user.id %}">Borrar</a>   
+                {% endif %}
+              {% endif %}
+
+
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+                {% endif %}
+</main>
+{% endblock %}

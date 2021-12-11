@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Crear Solicitud{% endblock %}
+{% block content %}
+{% include 'webpay_pago/includes/pagar_menu.html'%}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3 mb-5">
+      <div class="col-md-9 mx-auto">
+        <form action="" method="post">{% csrf_token %}
+
+            <label for="id_tipo_act">Que es lo que desea Solicitar:</label>
+
+          <div class="text-center">
+            <input type="submit" class="btn btn-primary btn-block" value="Pagar Cuenta" />
+            {{mensaje}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

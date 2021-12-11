@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+cx-oracle = "*"
+django-ckeditor = "*"
+docker-compose = "*"
+paramiko = "*"
+pillow = "*"
+pylint-celery = "*"
+pylint-django = "*"
+transbank-sdk = "*"
+django-bootstrap-datepicker-plus = "*"
+bootstrap-py = "*"
+mercadopago = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
